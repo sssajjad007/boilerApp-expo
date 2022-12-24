@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "boilerApp-expo",
+    "slug": "boilerApp-expo",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
