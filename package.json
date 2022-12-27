@@ -6,8 +6,7 @@
     "start": "npx expo start -c",
     "android": "npx expo run:android",
     "ios": "npx expo run:ios",
-    "web": "expo start --web",
-    "install": "npx expo install"
+    "web": "expo start --web"
   },
   "dependencies": {
     "@expo/webpack-config": "^0.17.2",
@@ -22,10 +21,7 @@
     "@react-navigation/native-stack": "^6.9.7",
     "@react-navigation/stack": "^6.3.10",
     "@reduxjs/toolkit": "^1.9.1",
-    "@types/react": "~18.0.26",
-    "@types/react-native": "~0.70.8",
     "axios": "^1.2.1",
-    "babel-plugin-styled-components": "^2.0.7",
     "expo": "~47.0.9",
     "expo-splash-screen": "~0.17.5",
     "expo-status-bar": "~1.4.2",
