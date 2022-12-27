@@ -14,6 +14,11 @@
 		96905EF65AED1B983A6B3ABC /* libPods-boilerAppexpo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEBF8E8E6FB1BC6CAF49B5 /* libPods-boilerAppexpo.a */; };
 		B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
+		C823852B653A40169AA49E74 /* delino-icon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0D942AC6E9F74B67B92238DC /* delino-icon.ttf */; };
+		1352E33FFFA3417595EB815E /* IRANSansMobileFaNum.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 623AD93887AB4D75B84F0F73 /* IRANSansMobileFaNum.ttf */; };
+		21BBAF66758C4AC7B910E702 /* IRANSansMobileFaNum_Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C6EB52CCCA6143279819B89E /* IRANSansMobileFaNum_Bold.ttf */; };
+		25EF60E045E74F6DB3BC1554 /* IRANSansMobileFaNum_Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ACF6BDF5EE5F40BFBF544FB6 /* IRANSansMobileFaNum_Medium.ttf */; };
+		55623DBFD1AE4ABFA7E87F11 /* IRANSansMobileFaNum_UltraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C7B8CED57AB14CA38877343B /* IRANSansMobileFaNum_UltraLight.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +36,11 @@
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-boilerAppexpo/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
+		0D942AC6E9F74B67B92238DC /* delino-icon.ttf */ = {isa = PBXFileReference; name = "delino-icon.ttf"; path = "../assets/fonts/delino-icon.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		623AD93887AB4D75B84F0F73 /* IRANSansMobileFaNum.ttf */ = {isa = PBXFileReference; name = "IRANSansMobileFaNum.ttf"; path = "../assets/fonts/IRANSansMobileFaNum.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C6EB52CCCA6143279819B89E /* IRANSansMobileFaNum_Bold.ttf */ = {isa = PBXFileReference; name = "IRANSansMobileFaNum_Bold.ttf"; path = "../assets/fonts/IRANSansMobileFaNum_Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		ACF6BDF5EE5F40BFBF544FB6 /* IRANSansMobileFaNum_Medium.ttf */ = {isa = PBXFileReference; name = "IRANSansMobileFaNum_Medium.ttf"; path = "../assets/fonts/IRANSansMobileFaNum_Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C7B8CED57AB14CA38877343B /* IRANSansMobileFaNum_UltraLight.ttf */ = {isa = PBXFileReference; name = "IRANSansMobileFaNum_UltraLight.ttf"; path = "../assets/fonts/IRANSansMobileFaNum_UltraLight.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +95,7 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				D65327D7A22EEC0BE12398D9 /* Pods */,
 				D7E4C46ADA2E9064B798F356 /* ExpoModulesProviders */,
+				061AC50440704D6DB34799D5 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -132,6 +143,19 @@
 			);
 			name = ExpoModulesProviders;
 			sourceTree = "<group>";
+		};
+		061AC50440704D6DB34799D5 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				0D942AC6E9F74B67B92238DC /* delino-icon.ttf */,
+				623AD93887AB4D75B84F0F73 /* IRANSansMobileFaNum.ttf */,
+				C6EB52CCCA6143279819B89E /* IRANSansMobileFaNum_Bold.ttf */,
+				ACF6BDF5EE5F40BFBF544FB6 /* IRANSansMobileFaNum_Medium.ttf */,
+				C7B8CED57AB14CA38877343B /* IRANSansMobileFaNum_UltraLight.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -196,6 +220,11 @@
 				BB2F792D24A3F905000567C9 /* Expo.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
+				C823852B653A40169AA49E74 /* delino-icon.ttf in Resources */,
+				1352E33FFFA3417595EB815E /* IRANSansMobileFaNum.ttf in Resources */,
+				21BBAF66758C4AC7B910E702 /* IRANSansMobileFaNum_Bold.ttf in Resources */,
+				25EF60E045E74F6DB3BC1554 /* IRANSansMobileFaNum_Medium.ttf in Resources */,
+				55623DBFD1AE4ABFA7E87F11 /* IRANSansMobileFaNum_UltraLight.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

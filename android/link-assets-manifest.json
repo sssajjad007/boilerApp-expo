@@ -1,0 +1,25 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/delino-icon.ttf",
+      "sha1": "e2bd498dc8d574872d6418a34ba4aa6731b9387f"
+    },
+    {
+      "path": "assets/fonts/IRANSansMobileFaNum.ttf",
+      "sha1": "830c3bbddc74d5cf3f5dceedcdc25d25864622be"
+    },
+    {
+      "path": "assets/fonts/IRANSansMobileFaNum_Bold.ttf",
+      "sha1": "6ec5a2caf64d8b9744276f4847b61af4f8b7e90c"
+    },
+    {
+      "path": "assets/fonts/IRANSansMobileFaNum_Medium.ttf",
+      "sha1": "803845d97ad623faa1113612b726c8b1852ecf03"
+    },
+    {
+      "path": "assets/fonts/IRANSansMobileFaNum_UltraLight.ttf",
+      "sha1": "d77e6dba7dbf6d6c3cde0b649b3f28f9593b1a96"
+    }
+  ]
+}
