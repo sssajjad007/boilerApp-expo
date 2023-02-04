@@ -4,5 +4,5 @@ import { IActivityProps } from './types';
 
 export function Loading(props: IActivityProps) {
   const { size, activityColor, hasIcon } = props;
-  return <LoadingIndicator color={activityColor} />;
+  return <LoadingIndicator color={activityColor} style={{ zIndex: 10 }} />;
 }

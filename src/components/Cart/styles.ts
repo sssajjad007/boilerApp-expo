@@ -16,8 +16,8 @@ export const CardContainer = styled.View`
 export const Header = styled.View`
   width: 100%;
   height: 50px;
-  flex-direction: row;
-  justify-content: flex-end;
+  flex-direction: row-reverse;
+  justify-content: space-between;
   align-items: center;
   padding: 0 ${margin.normal}px;
   border-bottom-color: ${(p) => p.theme.colors.Gray[90]};

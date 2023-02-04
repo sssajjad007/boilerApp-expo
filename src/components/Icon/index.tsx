@@ -4,6 +4,7 @@ import { styleGen } from './styles';
 import { View } from 'react-native';
 import { IIconProps } from './type';
 import { createIconSetFromIcoMoon } from '@expo/vector-icons';
+
 export default createIconSetFromIcoMoon(icoMoonConfig, 'DelinoIcon', 'delino-icon.ttf');
 const Icon = createIconSetFromIcoMoon(icoMoonConfig, 'DelinoIcon', 'delino-icon.ttf');
 export function DelinoIcon(props: IIconProps) {

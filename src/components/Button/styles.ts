@@ -10,7 +10,7 @@ function buttonHeightCalc(size: tSize) {
     case 'Small':
       return 34;
     case 'Default':
-      return 40;
+      return 48;
     case 'Large':
       return 56;
     default:
@@ -154,13 +154,14 @@ function buttonStyle(args: IButtonStyles) {
     IconRight,
     children,
     minWidth,
+    maxWidth,
   } = args;
 
   const buttonHeight = buttonHeightCalc(size);
   const styles = StyleSheet.create({
     container: {
       minWidth: minWidth ? minWidth : buttonMinWidthCalc(size),
-      // maxWidth: '90%',
+      maxWidth: maxWidth ? maxWidth : undefined,
       height: buttonHeight,
       borderWidth: mode === 'Outlined' ? 1 : 0,
       backgroundColor: buttonBackgroundColor(mode, disabled, backgroundColor, theme),

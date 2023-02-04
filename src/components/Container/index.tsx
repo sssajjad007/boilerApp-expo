@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useRef } from 'react';
-import { Container } from '../../styles';
+import { CenterView, Container, LoadingIndicatorPrimary } from '../../styles';
 import TopBar from '../TopBar';
 import { IRootContainer } from './types';
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
@@ -10,7 +10,20 @@ import BranchItem from './BranchItem';
 import { View } from 'react-native';
 
 export function RootContainer(props: IRootContainer) {
-  const { isMenuIcon, title, children, branchListAction } = props;
+  const {
+    isMenuIcon,
+    title,
+    children,
+    branchListAction,
+    isBackIcon,
+    isCloseIcon,
+    isSearchIcon,
+    pageSheet,
+    isEditIcon,
+    loading,
+    onEditPress,
+    onSearchPress,
+  } = props;
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ['50%', '75 %'], []);
   const branchList = useSelector((state: RootState) => state.branch.branchList);
@@ -26,15 +39,28 @@ export function RootContainer(props: IRootContainer) {
   }, []);
 
   return (
-    <Container>
+    <Container edges={['left', 'right', pageSheet ? 'bottom' : 'top']}>
       <TopBar
+        isBackIcon={isBackIcon}
+        isCloseIcon={isCloseIcon}
+        isSearchIcon={isSearchIcon}
         branchListAction={branchListAction}
         isMenuIcon={isMenuIcon}
         title={title}
         currentBranchId={currentBranchId}
         handlePresentModalPress={handlePresentModalPress}
+        pageSheet={pageSheet}
+        isEditIcon={isEditIcon}
+        onEditPress={onEditPress}
+        onSearchPress={onSearchPress}
       />
-      {children}
+      {loading ? (
+        <CenterView>
+          <LoadingIndicatorPrimary />
+        </CenterView>
+      ) : (
+        children
+      )}
       <BottomSheetModal
         ref={bottomSheetModalRef}
         index={1}
@@ -47,14 +73,15 @@ export function RootContainer(props: IRootContainer) {
               animatedPosition={animatedPosition}
               style={style}
               close={close}
+              index={1}
             />
           );
         }}>
         <View style={{ flex: 1 }}>
           <FlatList
             data={branchList}
-            renderItem={({ item }: { item: any }) => {
-              return <BranchItem data={item} currentBranchId={currentBranchId} close={close} />;
+            renderItem={({ index, item }) => {
+              return <BranchItem key={index} data={item} currentBranchId={currentBranchId} close={close} />;
             }}
             // keyExtractor={keyExtractor}
           />
@@ -63,4 +90,3 @@ export function RootContainer(props: IRootContainer) {
     </Container>
   );
 }
-// const keyExtractor = (item: any) => `${item.id}`;

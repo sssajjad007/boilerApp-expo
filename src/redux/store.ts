@@ -11,12 +11,15 @@ import salesReducer from './slices/sales';
 import userReducer from './slices/user';
 import branchSlice from './slices/branch';
 import appSlice from './slices/app';
+import menuSlice from './slices/menu';
+
 const store = configureStore({
   reducer: {
     sales: salesReducer,
     user: userReducer,
     branch: branchSlice,
     app: appSlice,
+    menu: menuSlice,
   },
   middleware: (getDefaultMiddleware) =>
     __DEV__ ? getDefaultMiddleware().concat(flipperMiddlewares) : getDefaultMiddleware(),

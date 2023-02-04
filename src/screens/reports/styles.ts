@@ -32,11 +32,12 @@ export const CalendarButton = styled.TouchableOpacity.attrs(() => ({
 }))`
   height: 40px;
   min-width: 40px;
+  max-width: 160px;
   flex-direction: row-reverse;
   align-items: center;
   justify-content: flex-start;
   padding: 0 ${margin.thin}px;
-  background-color: ${(p) => p.theme.colors.Gray[90]};
+  background-color: ${(p) => p.theme.colors.Gray[100]};
   border-radius: 8px;
 `;
 export const DateText = styled(BodyRegular)`

@@ -1,17 +1,15 @@
 import { createDrawerNavigator, DrawerContentComponentProps, DrawerContentScrollView } from '@react-navigation/drawer';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 import styled from 'styled-components/native';
 import { DelinoIcon } from '../components/Icon';
-import { userLogout } from '../redux/slices/user';
+import { _Logout } from '../redux/slices/user';
 import { dispatch, RootState, useSelector } from '../redux/store';
 import LoginScreen from '../screens/auth/Login';
-import { BodyLarge, Logo, margin, textSize, TitleLarge } from '../styles';
-import { RootScreen } from './TabNavigation';
+import { BodyLarge, margin, textSize, TitleLarge } from '../styles';
+import { imageSize } from '../utils/helper';
+import MyTabs from './TabNavigation';
+import { IDrawerParamList } from './type';
 
-type IDrawerParamList = {
-  RootScreen: undefined;
-  LoginScreen: undefined;
-};
 const Drawer = createDrawerNavigator<IDrawerParamList>();
 
 export default function DrawerNavigation() {
@@ -25,27 +23,44 @@ export default function DrawerNavigation() {
         drawerActiveTintColor: '#e91e63',
         // drawerItemStyle: { marginVertical: 5 },
       }}>
-      <Drawer.Screen name="RootScreen" options={{ drawerLabel: 'RootScreen Option' }} component={RootScreen} />
-      <Drawer.Screen name="LoginScreen" options={{ drawerLabel: 'Setting Screen Option' }} component={LoginScreen} />
+      <Drawer.Screen name="MyTabs" options={{ drawerLabel: 'MyTabs Option' }} component={MyTabs} />
+      {/* <Drawer.Screen name="LoginScreen" options={{ drawerLabel: 'Setting Screen Option' }} component={LoginScreen} /> */}
     </Drawer.Navigator>
   );
 }
 function CustomDrawerContent(props: DrawerContentComponentProps) {
   const currentBranchId = useSelector((state: RootState) => state.branch.currentBranchId);
+  const {
+    imageLink,
+    adminEnableOrdering,
+    branchCode,
+    branchName,
+    currentDate,
+    hasCustomizedEngine,
+    id,
+    restaurantName,
+    restaurantTitle,
+    showInFoodiran,
+    userFullName,
+  } = currentBranchId;
   return (
-    <DrawerContentScrollView {...props}>
-      <Logo style={{ width: 120, height: 120 }} />
+    <DrawerContentScrollView {...props} style={{ paddingTop: 16 }}>
+      {/* <Logo style={styles.logo} /> */}
+      {imageLink && (
+        <Image
+          style={styles.logo}
+          source={{
+            uri: imageSize(imageLink, '80x80'),
+          }}
+        />
+      )}
       <View style={styles.resDetails}>
-        <TitleLarge>{currentBranchId.userFullName}</TitleLarge>
-        <BranchName>
-          {`${currentBranchId.restaurantTitle} ${currentBranchId.restaurantName}${
-            currentBranchId.branchName ? ` (${currentBranchId.branchName})` : ''
-          }`}
-        </BranchName>
+        <TitleLarge>{userFullName}</TitleLarge>
+        <BranchName>{`${restaurantTitle} ${restaurantName}${branchName ? ` (${branchName})` : ''}`}</BranchName>
       </View>
       <TouchableOpacity
         onPress={() => {
-          dispatch(userLogout());
+          dispatch(_Logout());
         }}
         activeOpacity={1}
         style={styles.exit}>
@@ -68,6 +83,12 @@ const styles = StyleSheet.create({
     height: 50,
     alignItems: 'center',
     justifyContent: 'space-between',
+    marginTop: 16,
+  },
+  logo: {
+    width: 80,
+    height: 80,
+    alignSelf: 'center',
   },
 });
 const BranchName = styled(BodyLarge)`

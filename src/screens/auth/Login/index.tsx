@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Keyboard } from 'react-native';
+import { Keyboard, KeyboardAvoidingView, Platform } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button } from '../../../components/Button';
 import FormProvider from '../../../components/hook-form/FormProvider';
 import RHFTextField from '../../../components/hook-form/RHFTextField';
@@ -12,6 +13,7 @@ type FormValues = {
   username: string;
   password: string;
 };
+
 const WELCOME = 'خوش آمدید';
 const ENTER_DATA = 'اطلاعات ورود به سیستم مدیریت دلینو را وارد کنید';
 
@@ -19,8 +21,8 @@ export default function LoginScreen() {
   console.log('LoginScreen');
   const methods = useForm<FormValues>({
     defaultValues: {
-      username: 'shila',
-      password: 'sHILA-dELINO',
+      username: '',
+      password: '',
     },
   });
   // setTimeout(() => {
@@ -31,6 +33,7 @@ export default function LoginScreen() {
     setError,
     formState: { errors, isSubmitting },
   } = methods;
+  const inset = useSafeAreaInsets();
 
   const onSubmit = async ({ username, password }: FormValues) => {
     console.log('fetch user ');
@@ -46,49 +49,45 @@ export default function LoginScreen() {
       <Header>
         <Logo />
       </Header>
-      <ScrollViewContainer>
-        <TitleContainer>
-          <Headline5>{WELCOME}</Headline5>
-          <BodyRegular>{ENTER_DATA}</BodyRegular>
-        </TitleContainer>
-        <InputContainer>
-          <FormProvider methods={methods}>
-            <RHFTextField
-              name="username"
-              title={'نام کاربری'}
-              placeholder={'نام کاربری خود را وارد کنید.'}
-              rules={{
-                required: 'رمز عبور الزامی است',
-              }}
-            />
-          </FormProvider>
-        </InputContainer>
-        <InputContainer>
-          <FormProvider methods={methods}>
-            <RHFTextField
-              secureTextEntry
-              name="password"
-              title={'رمز عبور'}
-              placeholder={'رمز عبور خود را وارد کنید.'}
-              rules={{
-                required: 'رمز عبور الزامی است',
-              }}
-              errors={errors.password?.message ? errors.password?.message : ''}
-            />
-          </FormProvider>
-        </InputContainer>
-      </ScrollViewContainer>
-      <ButtonContainer>
-        <Button
-          // IconRight
-          // iconName="icon_alert"
-          loading={isSubmitting}
-          mode="Filled"
-          size="Large"
-          onPress={handleSubmit(onSubmit)}>
-          {'ورود'}
-        </Button>
-      </ButtonContainer>
+      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ flex: 1 }}>
+        <ScrollViewContainer>
+          <TitleContainer>
+            <Headline5>{WELCOME}</Headline5>
+            <BodyRegular>{ENTER_DATA}</BodyRegular>
+          </TitleContainer>
+          <InputContainer>
+            <FormProvider methods={methods}>
+              <RHFTextField
+                name="username"
+                title={'نام کاربری'}
+                placeholder={'نام کاربری خود را وارد کنید.'}
+                rules={{
+                  required: 'رمز عبور الزامی است',
+                }}
+              />
+            </FormProvider>
+          </InputContainer>
+          <InputContainer>
+            <FormProvider methods={methods}>
+              <RHFTextField
+                secureTextEntry
+                name="password"
+                title={'رمز عبور'}
+                placeholder={'رمز عبور خود را وارد کنید.'}
+                rules={{
+                  required: 'رمز عبور الزامی است',
+                }}
+                errors={errors.password?.message ? errors.password?.message : ''}
+              />
+            </FormProvider>
+          </InputContainer>
+        </ScrollViewContainer>
+        <ButtonContainer inset={inset.bottom}>
+          <Button gestureDisabled loading={isSubmitting} mode="Filled" size="Large" onPress={handleSubmit(onSubmit)}>
+            {'ورود'}
+          </Button>
+        </ButtonContainer>
+      </KeyboardAvoidingView>
     </Container>
   );
 }

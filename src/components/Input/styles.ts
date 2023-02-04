@@ -92,7 +92,7 @@ function styleGenerator(args: IInputStyleGen) {
     input: {
       flex: 1,
       top: 10, // input value going down for some stupid reason
-      // backgroundColor: 'pink',
+      paddingLeft: 48,
     },
     inputFont: {
       ...Title.Regular,
@@ -113,10 +113,11 @@ function styleGenerator(args: IInputStyleGen) {
       color: theme.colors.Error.Main,
     },
     clearButtonContainer: {
-      flex: 1,
-      zIndex: 1,
-      alignItems: 'flex-end',
-      justifyContent: 'center',
+      position: 'absolute',
+      zIndex: 100,
+      backgroundColor: 'white',
+      top: 18,
+      left: 18,
     },
     errorContainer: {
       marginBottom: 16,
@@ -218,7 +219,7 @@ function styleGenerator(args: IInputStyleGen) {
     animatedTextStyle,
     selectionColor,
     INPUT_HEIGHT: inputHeight,
-    clearIconSize: 24,
+    clearIconSize: 16,
     clearIconColor: hasError ? theme.colors.Error.Main : undefined,
   };
 }

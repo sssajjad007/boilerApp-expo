@@ -15,7 +15,7 @@ export function styleGenerator(size: number) {
       justifyContent: 'center',
     },
     labelContainer: {
-      paddingRight: 16,
+      paddingRight: 8,
       alignItems: 'center',
       justifyContent: 'center',
     },

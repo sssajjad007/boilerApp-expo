@@ -22,6 +22,21 @@ export const userTempToken = async () => {
     const { data } = await apiAuth.post('user/loginToken');
     return data.token;
   } catch (e) {
-    throw e;
+    return { error: 'درخواست با خطا مواجه شد' };
   }
+};
+
+export const getUserProfile = async () => {
+  const result = { success: true, message: '' };
+  try {
+    const { data } = await apiAuth.get<number[]>('restaurant/getRestaurantIdBranchCodeList');
+    if (!data) {
+      result.success = false;
+      result.message = 'یوزر یافت نشد!';
+    }
+  } catch (e) {
+    result.success = false;
+    result.message = 'درخواست با خطا مواجه شد';
+  }
+  return result;
 };

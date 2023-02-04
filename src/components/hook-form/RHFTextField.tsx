@@ -10,7 +10,7 @@ import { IFormProvider } from './type';
 //   rules: { [key: string]: string }; //todo
 // }
 
-export default function RHFTextField({ name, rules = {}, title, placeholder, ...porps }: IFormProvider) {
+export default function RHFTextField({ name, rules = {}, title, placeholder, ...props }: IFormProvider) {
   const { control } = useFormContext();
   return (
     <Controller
@@ -20,16 +20,14 @@ export default function RHFTextField({ name, rules = {}, title, placeholder, ...
       render={({ field, fieldState: { error, isTouched } }) => {
         const { onChange, value } = field;
         return (
-          <>
-            <Input
-              mode="flat"
-              title={title}
-              value={value}
-              onChangeText={onChange}
-              // placeholder={placeholder}
-              {...porps}
-            />
-          </>
+          <Input
+            mode="flat"
+            title={title}
+            value={value}
+            onChangeText={onChange}
+            // placeholder={placeholder}
+            {...props}
+          />
         );
       }}
     />

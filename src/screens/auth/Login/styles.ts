@@ -6,15 +6,17 @@ export const TitleContainer = styled.View`
   justify-content: center;
   height: 100px;
   width: 90%;
+  align-self: center;
 `;
 export const InputContainer = styled.View`
   width: 90%;
   padding: 8px 0;
+  align-self: center;
 `;
-export const ButtonContainer = styled.View`
+export const ButtonContainer = styled.View<{ inset: number }>`
   width: 90%;
   align-self: center;
-  padding-bottom: ${Platform.OS === 'ios' ? 0 : 24}px; //fix for ios
+  padding-bottom: ${(p) => (Platform.OS === 'ios' ? (p.inset > 0 ? 0 : 24) : 24)}px; //fix for ios
   background-color: ${(p) => p.theme.colors.Gray.White};
   z-index: 10;
 `;

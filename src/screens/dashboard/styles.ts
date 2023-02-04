@@ -7,4 +7,5 @@ export const HeaderTitle = styled.View`
   align-items: center;
   flex-direction: row-reverse;
   padding: ${margin.normal}px;
+  align-self: center;
 `;

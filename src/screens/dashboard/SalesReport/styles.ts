@@ -6,8 +6,11 @@ export const Wrapper = styled.View`
   width: 90%;
   justify-content: space-around;
   flex-direction: row-reverse;
+  align-self: center;
 `;
-const Box = styled.View`
+const Box = styled.TouchableOpacity.attrs({
+  activeOpacity: 1,
+})`
   height: 130px;
   /* width: 100px; */
   border-radius: ${margin.normal}px;

@@ -20,6 +20,10 @@
     {
       "path": "assets/fonts/IRANSansMobileFaNum_UltraLight.ttf",
       "sha1": "d77e6dba7dbf6d6c3cde0b649b3f28f9593b1a96"
+    },
+    {
+      "path": "assets/fonts/selection.json",
+      "sha1": "7f6986d97e83a11c938272d67437ce9b6cb79adb"
     }
   ]
 }

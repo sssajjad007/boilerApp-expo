@@ -1,7 +1,7 @@
 import { PropsWithChildren, ReactElement, Ref } from 'react';
 import { RectButton } from 'react-native-gesture-handler';
 import { DefaultTheme } from 'styled-components/native';
-import { UseResponsiveEnum } from '../Icon/type';
+import { IconEnums } from '../Icon/type';
 
 export type tMode = 'Filled' | 'Outlined' | 'Text';
 
@@ -19,7 +19,7 @@ export type IButtonProps = PropsWithChildren<{
   loading?: boolean;
   IconRight?: boolean;
   IconLeft?: boolean;
-  iconName?: keyof typeof UseResponsiveEnum;
+  iconName?: keyof typeof IconEnums;
   disabled?: boolean;
   disabledWithAction?: boolean;
   textColor?: string;
@@ -27,6 +27,8 @@ export type IButtonProps = PropsWithChildren<{
   fullRadius?: boolean;
   iconSize?: number;
   minWidth?: number;
+  gestureDisabled?: boolean;
+  maxWidth?: number;
 }>;
 
 export interface IActivityProps {
@@ -47,4 +49,5 @@ export type IButtonStyles = PropsWithChildren<{
   IconRight?: boolean;
   IconLeft?: boolean;
   minWidth?: number;
+  maxWidth?: number;
 }>;

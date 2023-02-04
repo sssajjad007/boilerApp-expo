@@ -1,5 +1,5 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
-import { LoadingIndicator, textSize } from '../../../styles';
+import { LoadingIndicatorPrimary, TextError, textSize } from '../../../styles';
 import { Actions, ActionText, ActionWeek, CurrentWeek, Wrapper } from './styles';
 import Chart from '../../../components/Chart';
 import Cart from '../../../components/Cart';
@@ -11,6 +11,7 @@ import { dateFormatted, throttled, useThrottled } from '../../../utils';
 import { DelinoIcon } from '../../../components/Icon';
 import { useTheme } from 'styled-components/native';
 import { IRef, IRefProps } from '../types';
+import { ReportBranchChartData } from '../../../api/types';
 
 const TODAY_REPORT_ORDERS = 'گزارش تعداد سفارش ها';
 
@@ -20,10 +21,21 @@ export const SalesChart = forwardRef<IRef, IRefProps>((props, ref) => {
   }));
   const branchId = useSelector((state: RootState) => state.branch.currentBranchId.id);
   const theme = useTheme();
-  const chartData = useSelector((state: RootState) => state.sales.chartData);
   const [weekRange, setWeekRange] = useState<WeekRange>();
   const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>('');
+  const [chartData, setChartData] = useState<ReportBranchChartData>({ label: [], x: [], y: [] });
   const { onTouchablePress } = useThrottled();
+
+  function disableNextWeek() {
+    if (weekRange) {
+      const dateTo = weekRange.to;
+      if (String(dateTo).slice(0, 10) === String(new Date()).slice(0, 10)) {
+        return true;
+      }
+    }
+    return false;
+  }
   const onNextWeek = () => {
     if (weekRange) {
       const dateFrom = weekRange.from;
@@ -64,11 +76,17 @@ export const SalesChart = forwardRef<IRef, IRefProps>((props, ref) => {
   async function fetchData() {
     if (weekRange) {
       setLoading(true);
-      await getChartData({
+      const { chartData, error } = await getChartData({
         fromDate: dateFormatted(weekRange.from),
         toDate: dateFormatted(weekRange.to),
         branchId,
       });
+      if (error) {
+        setError(error);
+      }
+      if (chartData) {
+        setChartData(chartData);
+      }
       setLoading(false);
     }
   }
@@ -83,7 +101,7 @@ export const SalesChart = forwardRef<IRef, IRefProps>((props, ref) => {
                 onTouchablePress(onNextWeek);
               }}>
               <DelinoIcon name="icon_angle-right" color={theme.colors.Gray[50]} size={textSize.xxSmall} />
-              <ActionText>هفته بعد</ActionText>
+              <ActionText active={disableNextWeek()}>هفته بعد</ActionText>
             </ActionWeek>
             <CurrentWeek>
               {weekRange.from.format('jD jMMMM')} - {weekRange.to.format('jD jMMMM')}
@@ -99,8 +117,10 @@ export const SalesChart = forwardRef<IRef, IRefProps>((props, ref) => {
         )}
         {chartData.x.length > 0 && !loading ? (
           <Chart data={chartData} />
+        ) : error ? (
+          <TextError>{error}</TextError>
         ) : (
-          <LoadingIndicator color={theme.colors.Primary.Main} />
+          <LoadingIndicatorPrimary />
         )}
       </Wrapper>
     </Cart>

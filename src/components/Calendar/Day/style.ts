@@ -1,9 +1,13 @@
 import styled, { css } from 'styled-components/native';
+import { BodyXLarge, TitleRegular } from '../../../styles';
 
-export const Container = styled.TouchableOpacity`
+export const Container = styled.TouchableOpacity.attrs(() => ({
+  activeOpacity: 1,
+}))`
   height: 36px;
   width: 100%;
   align-items: center;
+  /* padding-top: 8px; */
 `;
 export type IWrapperProps = {
   single?: boolean;
@@ -16,7 +20,7 @@ export const Wrapper = styled.View<IWrapperProps>`
   justify-content: center;
   z-index: 10;
   overflow: hidden;
-  width: ${(p) => (p.single ? '44px' : '100%')};
+  width: ${(p) => (p.single ? '44px' : '100.2%')};
 
   ${(p) =>
     (p.single || p.betweenDay || p.startingDay || p.endingDay) &&
@@ -60,11 +64,11 @@ export type ITextProps = {
   state: '' | 'disabled' | 'today' | 'selected';
   selected: boolean;
 };
-export const Text = styled.Text<ITextProps>`
+export const Day = styled(BodyXLarge)<ITextProps>`
   text-align: center;
   color: ${(p) =>
     (p.selected && p.theme.colors.Gray.White) ||
-    (p.state === 'disabled' && p.theme.colors.Gray[70]) ||
-    (p.state === 'today' && p.theme.colors.Secondary.Main) ||
-    p.theme.colors.Gray.Black};
+    (p.state === 'disabled' && p.theme.colors.Gray[80]) ||
+    (p.state === 'today' && p.theme.colors.Info.Main) ||
+    p.theme.colors.Gray[0]};
 `;

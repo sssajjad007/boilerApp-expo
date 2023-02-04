@@ -9,12 +9,3 @@ export const getBranchList = async () => {
     return { error: 'درخواست با خطا مواجه شد' };
   }
 };
-
-export const getBranchCodeList = async () => {
-  try {
-    const { data } = await apiAuth.get<number[]>('restaurant/getRestaurantIdBranchCodeList');
-    return { data };
-  } catch (e) {
-    return { error: 'درخواست با خطا مواجه شد' };
-  }
-};

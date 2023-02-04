@@ -7,7 +7,6 @@ export const Container = styled.TouchableOpacity.attrs({
 })`
   width: ${(p: { wide: boolean }) => (p.wide ? '100%' : '168px')};
   flex-direction: row;
-  min-width: 174px;
   height: 40px;
   border-radius: 8px;
   align-items: center;
@@ -19,7 +18,7 @@ export const SwipeAbleButton = styled(Animated.View)`
   position: absolute;
   left: 0;
   top: 4px;
-  width: 50%;
+  width: 80px;
   height: 32px;
   border-radius: 8px;
   background-color: ${(p) => p.theme.colors.Gray.White};

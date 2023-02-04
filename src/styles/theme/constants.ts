@@ -3,8 +3,8 @@ import { scaleSize, fontSize } from '../mixins';
 export const HIT_SLOP: number = 6;
 
 export const margin = {
-  large: scaleSize(30),
-  normal: scaleSize(15),
+  large: scaleSize(32),
+  normal: scaleSize(16),
   thin: scaleSize(8),
   xThin: scaleSize(4),
 };
@@ -50,8 +50,8 @@ export const fontStyle = {
   bold: {
     ...Platform.select({
       ios: {
-        fontFamily: 'IRANSansMobileFaNum Bold',
-        // fontWeight: '700',
+        fontFamily: 'IRANSansMobileFaNum',
+        fontWeight: '800',
       },
       android: {
         fontFamily: 'IRANSansMobileFaNum_Bold',

@@ -3,7 +3,7 @@ import { FieldValues, RegisterOptions, SubmitHandler, UseFormReturn } from 'reac
 import { StyleProp, TextInputProps, TextStyle } from 'react-native';
 
 export type FormProps = PropsWithChildren<{
-  methods: UseFormReturn<{ username: string; password: string }>;
+  methods: UseFormReturn<any>;
 }>;
 export interface IFormProvider extends TextInputProps {
   errors?: string;
@@ -12,7 +12,7 @@ export interface IFormProvider extends TextInputProps {
   name: string;
   rules?: Pick<RegisterOptions<FieldValues>, 'maxLength' | 'minLength' | 'validate' | 'required'>;
   title: string;
-  placeholder: string;
+  placeholder?: string;
   focused?: boolean;
   multiline?: boolean;
   numberOfLines?: number;

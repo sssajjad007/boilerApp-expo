@@ -26,18 +26,18 @@ function AnimatedCheckbox(props: ICheckBoxProps) {
     });
   }, [checked]);
 
-  const animatedBoxProps = useAnimatedProps(
-    () => ({
-      stroke: interpolateColor(
-        progress.value,
-        [0, 1],
-        [theme.colors.Gray[90], theme.colors.Primary.Main], //gray light
-        'RGB'
-      ),
-      fill: interpolateColor(progress.value, [0, 1], ['#00000000', '#00000000'], 'RGB'),
-    }),
-    [theme.colors.Primary.Main, theme.colors.Gray[90]]
-  );
+  // const animatedBoxProps = useAnimatedProps(
+  //   () => ({
+  //     stroke: interpolateColor(
+  //       progress.value,
+  //       [0, 1],
+  //       [theme.colors.Gray[90], theme.colors.Primary.Main], //gray light
+  //       'RGB'
+  //     ),
+  //     fill: interpolateColor(progress.value, [0, 1], ['#00000000', '#00000000'], 'RGB'),
+  //   }),
+  //   [theme.colors.Primary.Main, theme.colors.Gray[90]]
+  // );
   return (
     <Svg viewBox={viewBox} width={size} height={size}>
       <Defs>
@@ -59,7 +59,9 @@ function AnimatedCheckbox(props: ICheckBoxProps) {
         strokeWidth={7}
         strokeLinejoin={'round'}
         strokeLinecap={'round'}
-        animatedProps={animatedBoxProps}
+        stroke={theme.colors.Primary.Main}
+        fill={'white'}
+        // animatedProps={animatedBoxProps}
       />
       <G clipPath="url(#clipPath)">
         <AnimatedStroke

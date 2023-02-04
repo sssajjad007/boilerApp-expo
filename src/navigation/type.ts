@@ -1,20 +1,34 @@
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { FoodItem, RestPaymentReport } from '../api/types';
 export type RootStackParamList = {
-  DashboardScreen: undefined; //{routeProps}
-  ReportScreen: undefined;
-  MenuScreen: undefined;
+  DashboardTab: undefined; //{routeProps}
+  ReportTab: undefined;
+  MenuTab: undefined;
 };
-export type DashboardStack = {
+export type DashboardTab = {
   DashboardScreen: undefined; //{routeProps}
   DrawerNavigation: undefined;
 };
-export type ReportStack = {
+export type ReportTab = {
   ReportScreen: undefined;
+  PaymentDetails: { data: RestPaymentReport };
+  WebView: { url: string; title: string; loadingImmediately?: boolean };
 };
-export type MenuStack = {
+export type MenuTab = {
   MenuScreen: undefined;
+  FoodList: undefined;
+  // FoodModal: { data: FoodItem };
+  Category: undefined;
 };
 
-export type DashboardScreenProps = NativeStackScreenProps<DashboardStack, 'DashboardScreen'>;
-export type ReportScreenProps = NativeStackScreenProps<RootStackParamList, 'ReportScreen'>;
-export type MenuScreenProps = NativeStackScreenProps<RootStackParamList, 'MenuScreen'>;
+export type DashboardScreenProps = NativeStackScreenProps<DashboardTab>;
+export type ReportScreenProps = NativeStackScreenProps<ReportTab>;
+export type MenuScreenProps = NativeStackScreenProps<MenuTab>;
+
+export type PaymentDetailsProps = NativeStackScreenProps<ReportTab, 'PaymentDetails'>;
+export type WebViewProps = NativeStackScreenProps<ReportTab, 'WebView'>;
+// export type FoodModalViewProps = NativeStackScreenProps<MenuTab, 'FoodModal'>;
+export type IDrawerParamList = {
+  MyTabs: undefined;
+  LoginScreen: undefined;
+};

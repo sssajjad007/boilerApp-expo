@@ -20,9 +20,9 @@ export const ActionWeek = styled.TouchableOpacity.attrs({ activeOpacity: 1 })`
   flex-direction: row-reverse;
 `;
 
-export const ActionText = styled(BodySmall)`
+export const ActionText = styled(BodySmall)<{ active?: boolean }>`
   padding: 0 ${margin.xThin}px;
-  color: ${(p) => p.theme.colors.Gray[50]};
+  color: ${(p) => (p.active ? p.theme.colors.Gray[90] : p.theme.colors.Gray[50])};
 `;
 
 export const CurrentWeek = styled(BodySmall)`

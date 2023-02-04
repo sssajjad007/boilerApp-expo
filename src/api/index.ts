@@ -1,6 +1,8 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
-import { Alert } from 'react-native';
 import { add, remove, retrieve } from '../core/mmkv';
+import { IReportTypeList } from '../redux/slices/types';
+import { failRefreshTokenAction } from '../redux/slices/user';
+import { dispatch } from '../redux/store';
 
 const STORAGE_TOKEN: string = 'token';
 const STORAGE_REFRESHTOKEN: string = 'refreshToken';
@@ -13,6 +15,22 @@ export const config: AxiosRequestConfig<any> = {
     'Content-Type': 'application/json',
     // 'cache-control': 'no-cache',
   },
+};
+export const reportPanelUrl = ({
+  token,
+  restId,
+  fromDate,
+  toDate,
+  reportType,
+}: {
+  token: string;
+  restId: number;
+  fromDate: string;
+  toDate: string;
+  reportType: keyof typeof IReportTypeList;
+}) => {
+  const path = `/Rest/ReportDelino/${restId}?fromDate=${fromDate}--toDate=${toDate}--reportType=${reportType}--appview`;
+  return `https://panel.delino.com/Account/StaticTokenLogin?token=${token}&path=${path}`;
 };
 export const authParams = {
   //   apiToken: 'WrZsrR0E8W6uuvNIAFbtesKqcfWEMvrrcImnlmHtS9IRPmXdlqYYGw1ohsQM552M',
@@ -136,13 +154,14 @@ const refreshTokenRequest = async () => {
       setAuth({ token, refreshToken });
       isRefreshing = false;
       refreshQueueRequests(token);
-
+      dispatch(failRefreshTokenAction(false));
       queueRequests = [];
     } else {
       remove(STORAGE_TOKEN);
       remove(STORAGE_REFRESHTOKEN);
       isRefreshing = false;
       queueRequests = [];
+      dispatch(failRefreshTokenAction(true));
     }
   } catch (e) {
     console.error(e);
@@ -150,9 +169,7 @@ const refreshTokenRequest = async () => {
     remove(STORAGE_REFRESHTOKEN);
     isRefreshing = false;
     queueRequests = [];
-    //dispatch(failRefreshTokenAction(true));
-    // TODO: ask Hamid about how to handle this error
-    // Alert.alert('refresh token faild, reload page is goes here...');
+    dispatch(failRefreshTokenAction(true));
   }
 };
 function refreshQueueRequests(token: any) {

@@ -1,15 +1,21 @@
 import React from 'react';
 import { CardContainer, Content, Header } from './styles';
-import { TitleRegular } from '../../styles';
+import { TitleLarge } from '../../styles';
 import { ICardProps } from './types';
+import { Button } from '../Button';
 
 export default function Cart(props: ICardProps) {
-  const { title, children } = props;
+  const { title, children, onPress, titleButton } = props;
   return (
     <CardContainer>
       {title && (
         <Header>
-          <TitleRegular>{title}</TitleRegular>
+          <TitleLarge>{title}</TitleLarge>
+          {onPress && titleButton && (
+            <Button mode="Filled" size="Default" onPress={onPress}>
+              {titleButton}
+            </Button>
+          )}
         </Header>
       )}
       <Content>{children}</Content>

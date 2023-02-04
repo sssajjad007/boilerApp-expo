@@ -1,5 +1,5 @@
 import React, { Ref, forwardRef } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, Pressable, TouchableOpacity, View, Platform } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import { useTheme } from 'styled-components/native';
 import { useThrottled } from '../../utils';
@@ -7,7 +7,7 @@ import { DelinoIcon } from '../Icon';
 import { Touchable } from '../Touchable';
 import { Loading } from './loading';
 import { styleGen } from './styles';
-import { IButtonProps, tMode } from './types';
+import { IButtonProps } from './types';
 function ButtonComponent(props: IButtonProps, ref: Ref<RectButton>) {
   const theme = useTheme();
   const {
@@ -26,6 +26,8 @@ function ButtonComponent(props: IButtonProps, ref: Ref<RectButton>) {
     iconSize,
     iconName,
     minWidth,
+    gestureDisabled,
+    maxWidth,
   } = props;
   const { styles, iconStyle, buttonTextColor } = styleGen({
     disabled,
@@ -39,8 +41,10 @@ function ButtonComponent(props: IButtonProps, ref: Ref<RectButton>) {
     IconRight,
     children,
     minWidth,
+    maxWidth,
   });
   const { onTouchablePress } = useThrottled();
+  const isAndroid = Platform.OS === 'android';
   function iconSizeCal() {
     if (size === 'Small') {
       return 16;
@@ -73,7 +77,7 @@ function ButtonComponent(props: IButtonProps, ref: Ref<RectButton>) {
       {loading ? (
         <Loading mode={mode} size={size} activityColor={buttonTextColor(mode, textColor, disabled, theme)} />
       ) : (
-        <View pointerEvents="none" style={{ zIndex: 10 }}>
+        <View pointerEvents="none" style={{ zIndex: 100 }}>
           <Text numberOfLines={1} style={styles.text}>
             {children}
           </Text>
@@ -82,7 +86,16 @@ function ButtonComponent(props: IButtonProps, ref: Ref<RectButton>) {
       {disabledWithAction && disabled && (
         <TouchableOpacity style={StyleSheet.absoluteFill} onPress={onPress} activeOpacity={1} />
       )}
-      {disabled || loading ? null : <Touchable ref={ref} onPress={onPress} rippleColor={rippleColorRender()} />}
+      {(gestureDisabled && isAndroid) || !loading ? (
+        <Pressable
+          style={[StyleSheet.absoluteFill]}
+          onPress={onPress}
+          android_ripple={{ color: rippleColorRender(), foreground: true }}
+        />
+      ) : null}
+      {gestureDisabled || disabled || loading ? null : (
+        <Touchable ref={ref} onPress={onPress} rippleColor={rippleColorRender()} />
+      )}
     </View>
   );
 }

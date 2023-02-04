@@ -1,33 +1,35 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Platform } from 'react-native';
-import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Easing, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { RootState, useSelector } from '../../redux/store';
-import { TitleRegular } from '../../styles';
+import { BodyRegular, TitleRegular } from '../../styles';
+import { Button } from '../Button';
 import { InfoContainer, NetInfoContainer } from './styles';
 
-const translateNetInfoStart = -56;
-
 export function NetInfoComponent() {
-  const translateY = useSharedValue(translateNetInfoStart);
+  const translateY = useSharedValue(0);
+  const opacity = useSharedValue(0);
   const isConnected = useSelector((state: RootState) => state.app.isConnected);
   const internetAvailable = useSelector((state: RootState) => state.app.internetAvailable);
   const vpn = useSelector((state: RootState) => state.app.vpn);
-  const insets = useSafeAreaInsets();
+
   const netInfoStyles = useAnimatedStyle(() => {
     return {
       transform: [{ translateY: translateY.value }],
+      opacity: opacity.value,
     };
   });
   useEffect(() => {
     if (vpn) {
-      translateY.value = withTiming(0, { duration: 500 });
+      translateY.value = withTiming(0, { duration: 200, easing: Easing.ease });
       return;
     }
     if (isConnected && internetAvailable) {
-      translateY.value = withTiming(translateNetInfoStart, { duration: 500 });
+      translateY.value = withTiming(0, { duration: 200, easing: Easing.ease });
+      opacity.value = withTiming(0, { duration: 200, easing: Easing.ease });
     } else {
-      translateY.value = withTiming(0, { duration: 500 });
+      translateY.value = withTiming(-80, { duration: 200, easing: Easing.ease });
+      opacity.value = withTiming(1, { duration: 200, easing: Easing.ease });
     }
   }, [isConnected, internetAvailable]);
   function contentGen() {
@@ -37,10 +39,8 @@ export function NetInfoComponent() {
     return 'اتصال به اینترنت یافت نشد.';
   }
   return (
-    <NetInfoContainer style={netInfoStyles} top={Platform.OS === 'ios' ? insets.top : 0}>
-      <InfoContainer>
-        <TitleRegular>{contentGen()}</TitleRegular>
-      </InfoContainer>
+    <NetInfoContainer style={netInfoStyles}>
+      <BodyRegular>{contentGen()}</BodyRegular>
     </NetInfoContainer>
   );
 }

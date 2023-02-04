@@ -1,5 +1,4 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { RootState, useSelector } from '../redux/store';
 import LoginScreen from '../screens/auth/Login';
 
 type IAuthStackParamList = {
